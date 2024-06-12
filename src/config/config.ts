@@ -1,26 +1,25 @@
-import { ApiClient, Configuration } from "cybersource-rest-client";
-import dotenv from "dotenv";
+import { DB_NAME, DB_PASSWORD, DB_USER, DB_HOST } from "../config/index";
 
-// Cargar variables de entorno desde el archivo .env
-dotenv.config();
-
-const configObject: Configuration = {
-  authenticationType: "http_signature",
-  runEnvironment: process.env.RUN_ENVIRONMENT || "apitest.cybersource.com",
-  merchantID: process.env.MERCHANT_ID!,
-  merchantKeyId: process.env.MERCHANT_KEY_ID!,
-  merchantsecretKey: process.env.MERCHANT_SECRET_KEY!,
-  logConfiguration: {
-    enableLog: true,
-    logFileName: "cybs",
-    logDirectory: "log",
-    logFileMaxSize: "5242880", // 5MB
-    loggingLevel: "debug",
-    enableMasking: true,
+export default {
+  development: {
+    username: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    host: DB_HOST,
+    dialect: "mysql",
+  },
+  test: {
+    username: "root",
+    password: null,
+    database: "",
+    host: "",
+    dialect: "mysql",
+  },
+  production: {
+    username: "root",
+    password: null,
+    database: "database_production",
+    host: "127.0.0.1",
+    dialect: "mysql",
   },
 };
-
-const apiClient = new ApiClient();
-apiClient.setConfiguration(configObject);
-
-export default apiClient;

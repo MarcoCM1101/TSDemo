@@ -1,5 +1,6 @@
-import { PaymentsApi, CreatePaymentRequest } from "cybersource-rest-client";
-import apiClient from "../config/config"; // Asegúrate de que la ruta es correcta
+import cybersourceRestApi from "cybersource-rest-client";
+import configObj from "../config/CybersourceConfig";
+import e from "express";
 
 interface PaymentData {
   cardNumber: string;
@@ -20,9 +21,9 @@ interface PaymentData {
 }
 
 const processPayment = async (paymentData: PaymentData): Promise<any> => {
-  const instance = new PaymentsApi(apiClient);
+  const instance = new cybersourceRestApi.PaymentsApi(configObj);
 
-  const request: CreatePaymentRequest = {
+  const request = {
     clientReferenceInformation: {
       code: "TC50171_3",
     },
@@ -57,7 +58,6 @@ const processPayment = async (paymentData: PaymentData): Promise<any> => {
   };
 
   try {
-    console.log("Request to Cybersource: ", request);
     const response = await new Promise<any>((resolve, reject) => {
       instance.createPayment(
         request,
@@ -76,12 +76,10 @@ const processPayment = async (paymentData: PaymentData): Promise<any> => {
     } else {
       throw new Error("Invalid response from Cybersource");
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error in processPayment: ", error);
-    throw new Error(`Payment processing failed: ${error.message}`);
+    throw new Error(`Payment processing failed`);
   }
 };
 
-export default {
-  processPayment,
-};
+export { processPayment };
