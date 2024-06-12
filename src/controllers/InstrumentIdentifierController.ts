@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import AbstractController from "./AbstractController";
 const cybersourceService = require("../services/instrumentIdentifierService");
+import db from "../models";
 
 class InstrumentIdentifierController extends AbstractController {
   private static _instance: InstrumentIdentifierController;
@@ -39,7 +40,7 @@ class InstrumentIdentifierController extends AbstractController {
       // Convierte la respuesta a un objeto JSON antes de enviarla
       const jsonResponse = JSON.parse(instrumentIdentifierResponse.text);
 
-      res.status(200).json(jsonResponse);
+      res.status(200).json(jsonResponse.id);
     } catch (error) {
       console.error("Error in createInstrumentIdentifier: ", error);
     }
