@@ -7,6 +7,7 @@ import UsuarioController from "./controllers/UsuarioController";
 import TokenController from "./controllers/TokenController";
 import InstrumentIdentifierController from "./controllers/InstrumentIdentifierController";
 import SetupPayerAuthenticationController from "./controllers/setupPayerAuthenticationController";
+import RetrieveInstrumentIdentifierController from "./controllers/RetrieveInstrumentIdentifier";
 
 const server = new Server({
   port: PORT,
@@ -18,6 +19,7 @@ const server = new Server({
     TokenController.instance,
     InstrumentIdentifierController.instance,
     SetupPayerAuthenticationController.instance,
+    RetrieveInstrumentIdentifierController.instance,
   ],
 });
 
