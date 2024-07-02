@@ -20,7 +20,7 @@ class Server {
     this.env = appInit.env;
     this.loadMiddlewares(appInit.middlewares);
     this.loadRoutes(appInit.controllers);
-    this.connectDB();
+    // this.connectDB();
   }
 
   private loadRoutes(controllers: AbstractController[]) {
@@ -38,9 +38,9 @@ class Server {
     });
   }
 
-  private async connectDB() {
-    await db.sequelize.sync();
-  }
+  // private async connectDB() {
+  //   await db.sequelize.sync();
+  // }
 
   public init() {
     this.app.listen(this.port, () => {
