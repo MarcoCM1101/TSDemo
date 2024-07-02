@@ -14,12 +14,12 @@ const server = new Server({
   env: NODE_ENV,
   middlewares: [express.json(), express.urlencoded({ extended: true }), cors()],
   controllers: [
-    PaymentController.instance,
+    // PaymentController.instance,
     // UsuarioController.instance,
-    TokenController.instance,
-    InstrumentIdentifierController.instance,
+    // TokenController.instance,
+    // InstrumentIdentifierController.instance,
     PayerAuthenticationController.instance,
-    RetrieveInstrumentIdentifierController.instance,
+    // RetrieveInstrumentIdentifierController.instance,
   ],
 });
 
