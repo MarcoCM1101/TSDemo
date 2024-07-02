@@ -6,7 +6,7 @@ import PaymentController from "./controllers/PaymentController";
 import UsuarioController from "./controllers/UsuarioController";
 import TokenController from "./controllers/TokenController";
 import InstrumentIdentifierController from "./controllers/InstrumentIdentifierController";
-import SetupPayerAuthenticationController from "./controllers/setupPayerAuthenticationController";
+import PayerAuthenticationController from "./controllers/PayerAuthenticationController";
 import RetrieveInstrumentIdentifierController from "./controllers/RetrieveInstrumentIdentifier";
 
 const server = new Server({
@@ -18,7 +18,7 @@ const server = new Server({
     UsuarioController.instance,
     TokenController.instance,
     InstrumentIdentifierController.instance,
-    SetupPayerAuthenticationController.instance,
+    PayerAuthenticationController.instance,
     RetrieveInstrumentIdentifierController.instance,
   ],
 });

@@ -1,10 +1,10 @@
 import cybersourceRestApi from "cybersource-rest-client";
 import configObj from "../config/CybersourceConfig";
-import e from "express";
 
 interface PaymentData {
   cardNumber: string;
-  expiryDate: string;
+  expirationMonth: string; // Expected format: MM
+  expirationYear: string; // Expected format: YYYY
   cvv: string;
   amount: string;
   billingInfo: {
@@ -21,7 +21,14 @@ interface PaymentData {
 }
 
 const processPayment = async (paymentData: PaymentData): Promise<any> => {
+  console.log(paymentData.expirationMonth);
   const instance = new cybersourceRestApi.PaymentsApi(configObj);
+
+  if (!paymentData.expirationMonth || !paymentData.expirationYear) {
+    throw new Error(
+      "Invalid expiry date. Expected separate expiration month and year."
+    );
+  }
 
   const request = {
     clientReferenceInformation: {
@@ -33,8 +40,8 @@ const processPayment = async (paymentData: PaymentData): Promise<any> => {
     paymentInformation: {
       card: {
         number: paymentData.cardNumber,
-        expirationMonth: paymentData.expiryDate.split("/")[0],
-        expirationYear: paymentData.expiryDate.split("/")[1],
+        expirationMonth: paymentData.expirationMonth,
+        expirationYear: paymentData.expirationYear,
         securityCode: paymentData.cvv,
       },
     },
@@ -78,7 +85,7 @@ const processPayment = async (paymentData: PaymentData): Promise<any> => {
     }
   } catch (error) {
     console.error("Error in processPayment: ", error);
-    throw new Error(`Payment processing failed`);
+    return { error: `Payment processing failed: ${error}` };
   }
 };
 

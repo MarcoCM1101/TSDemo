@@ -33,13 +33,15 @@ class PaymentController extends AbstractController {
         paymentData
       );
 
-      // Convierte la respuesta a un objeto JSON antes de enviarla
-      const jsonResponse = JSON.parse(paymentResponse);
-      console.log(jsonResponse);
-
-      res.status(200).json(jsonResponse);
+      if (paymentResponse.error) {
+        res.status(400).json({ error: paymentResponse.error });
+      } else {
+        const jsonResponse = JSON.parse(paymentResponse.text);
+        res.status(200).json(jsonResponse);
+      }
     } catch (error) {
       console.error("Error in createPayment: ", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
   }
 }

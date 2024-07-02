@@ -9,15 +9,15 @@ const setupPayerAuthentication = async (authenticationData: any) => {
   const requestObj = new cybersourceRestApi.PayerAuthSetupRequest();
 
   const clientReferenceInformation =
-    new cybersourceRestApi.Ptsv2paymentsClientReferenceInformation();
+    new cybersourceRestApi.Riskv1decisionsClientReferenceInformation();
   clientReferenceInformation.code =
     authenticationData.clientReferenceInformation.code;
   requestObj.clientReferenceInformation = clientReferenceInformation;
 
   const paymentInformation =
-    new cybersourceRestApi.Ptsv2paymentsPaymentInformation();
+    new cybersourceRestApi.Riskv1authenticationsetupsPaymentInformation();
   const paymentInformationCard =
-    new cybersourceRestApi.Ptsv2paymentsPaymentInformationCard();
+    new cybersourceRestApi.Riskv1authenticationsetupsPaymentInformationCard();
   paymentInformationCard.type = authenticationData.paymentInformation.card.type;
   paymentInformationCard.number =
     authenticationData.paymentInformation.card.number;
