@@ -15,7 +15,7 @@ const server = new Server({
   middlewares: [express.json(), express.urlencoded({ extended: true }), cors()],
   controllers: [
     PaymentController.instance,
-    UsuarioController.instance,
+    // UsuarioController.instance,
     TokenController.instance,
     InstrumentIdentifierController.instance,
     PayerAuthenticationController.instance,
