@@ -8,18 +8,20 @@ import TokenController from "./controllers/TokenController";
 import InstrumentIdentifierController from "./controllers/InstrumentIdentifierController";
 import PayerAuthenticationController from "./controllers/PayerAuthenticationController";
 import RetrieveInstrumentIdentifierController from "./controllers/RetrieveInstrumentIdentifier";
+import DecisionManagerController from "./controllers/DecisionManagerController";
 
 const server = new Server({
   port: PORT,
   env: NODE_ENV,
   middlewares: [express.json(), express.urlencoded({ extended: true }), cors()],
   controllers: [
-    // PaymentController.instance,
-    // UsuarioController.instance,
-    // TokenController.instance,
-    // InstrumentIdentifierController.instance,
+    PaymentController.instance,
+    UsuarioController.instance,
+    TokenController.instance,
+    InstrumentIdentifierController.instance,
     PayerAuthenticationController.instance,
-    // RetrieveInstrumentIdentifierController.instance,
+    RetrieveInstrumentIdentifierController.instance,
+    DecisionManagerController.instance,
   ],
 });
 
